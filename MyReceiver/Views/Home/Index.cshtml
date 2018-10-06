@@ -1,0 +1,33 @@
+﻿<div class="jumbotron">
+    <h5>ASP.NET Web Hooks Receiver</h5>
+</div>
+<div id="newProductList"></div>
+@Html.Partial("Product")
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        $(function () {
+            var prodTable$ = $('#prodTable');
+
+            // Reference the auto-generated proxy for the hub.
+            var chat = $.connection.webHookHub;
+            // Create a function that the hub can call back to display messages.
+            chat.client.addedProduct = function (product) {
+                // Add the message to the page.
+                prodTable$.find('tbody').append('<tr><td>' + htmlEncode(product.Name) + '</td><td>' + htmlEncode(product.Description) + '</td></tr>');
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+            });
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}
