@@ -54,9 +54,9 @@ namespace MyReceiver
                 Uri baseAddress = new Uri(senderURL);
                 client.DefaultRequestHeaders.Clear();
                 client.BaseAddress = baseAddress;
-
-                var username = "sydney900@hotmail.com";
-                var password = "Web@H00ks";
+                
+                var username = ConfigurationManager.AppSettings["UserName"];                
+                var password = ConfigurationManager.AppSettings["Password"];
 
                 // for the basic auth
                 //client.DefaultRequestHeaders.Accept.Clear();
