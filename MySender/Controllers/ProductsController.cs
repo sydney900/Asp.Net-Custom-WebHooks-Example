@@ -14,6 +14,7 @@ using Business;
 
 namespace MySender.Controllers
 {
+    [Authorize]
     public class ProductsController : ApiController
     {       
         // POST: api/Products
